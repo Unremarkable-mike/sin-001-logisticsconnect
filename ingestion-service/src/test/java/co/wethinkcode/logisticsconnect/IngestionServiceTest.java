@@ -17,6 +17,7 @@ public class IngestionServiceTest {
     @Test
     @DisplayName("GET /hubs")
     public void shouldGetHubs() throws JsonProcessingException {
+        IngestionServiceApp.main(null);
         ObjectMapper objectMapper = new ObjectMapper();
         HttpResponse<String> response = Unirest.get("http://localhost:7050/hubs").asString();
         assertEquals(200, response.getStatus());
@@ -24,8 +25,8 @@ public class IngestionServiceTest {
 
         for (JsonNode intersection : intersections) {
             assertTrue(intersection.asText().contains("hub_id"));
-            assertTrue(intersection.asText().contains("Province"));
-            assertTrue(intersection.asText().contains("Sorting_center"));
+            assertTrue(intersection.asText().contains("province"));
+            assertTrue(intersection.asText().contains("sorting_center"));
             assertTrue(intersection.asText().contains("active"));
         }
 
